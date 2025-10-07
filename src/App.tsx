@@ -51,27 +51,11 @@ const createSkill = (): Skill => ({
 });
 
 const initialData: CVData = {
-  personal: {
-    fullName: "Nome Cognome",
-    role: "Ruolo professionale",
-    email: "nome@azienda.com",
-    phone: "+39 000 000 0000",
-    location: "Città, Paese",
-    website: "https://portfolio.com",
-    linkedin: "https://linkedin.com/in/username",
-    photo: ""
-  },
-  summary:
-    "Breve descrizione delle tue competenze chiave, risultati ottenuti e obiettivi professionali.",
+  personal: createEmptyPersonalDetails(),
+  summary: "",
   experiences: [createExperience()],
   educations: [createEducation()],
-  skills: [
-    {
-      id: createId(),
-      name: "Comunicazione",
-      level: "Advanced"
-    }
-  ]
+  skills: [createSkill()]
 };
 
 type ExperienceField = Exclude<keyof Experience, "id">;
@@ -267,6 +251,7 @@ function App() {
               <label htmlFor="fullName">Nome e cognome</label>
               <input
                 id="fullName"
+                placeholder="Nome Cognome"
                 value={cvData.personal.fullName}
                 onChange={(event) => handlePersonalChange("fullName", event.target.value)}
               />
@@ -275,6 +260,7 @@ function App() {
               <label htmlFor="role">Ruolo</label>
               <input
                 id="role"
+                placeholder="Ruolo professionale"
                 value={cvData.personal.role}
                 onChange={(event) => handlePersonalChange("role", event.target.value)}
               />
@@ -284,6 +270,7 @@ function App() {
               <input
                 id="email"
                 type="email"
+                placeholder="nome@azienda.com"
                 value={cvData.personal.email}
                 onChange={(event) => handlePersonalChange("email", event.target.value)}
               />
@@ -292,6 +279,7 @@ function App() {
               <label htmlFor="phone">Telefono</label>
               <input
                 id="phone"
+                placeholder="+39 000 000 0000"
                 value={cvData.personal.phone}
                 onChange={(event) => handlePersonalChange("phone", event.target.value)}
               />
@@ -300,6 +288,7 @@ function App() {
               <label htmlFor="location">Località</label>
               <input
                 id="location"
+                placeholder="Città, Paese"
                 value={cvData.personal.location}
                 onChange={(event) => handlePersonalChange("location", event.target.value)}
               />
@@ -308,6 +297,7 @@ function App() {
               <label htmlFor="website">Sito web / Portfolio</label>
               <input
                 id="website"
+                placeholder="https://portfolio.com"
                 value={cvData.personal.website}
                 onChange={(event) => handlePersonalChange("website", event.target.value)}
               />
@@ -316,6 +306,7 @@ function App() {
               <label htmlFor="linkedin">LinkedIn</label>
               <input
                 id="linkedin"
+                placeholder="https://linkedin.com/in/username"
                 value={cvData.personal.linkedin}
                 onChange={(event) => handlePersonalChange("linkedin", event.target.value)}
               />
@@ -362,7 +353,7 @@ function App() {
               id="summary"
               value={cvData.summary}
               onChange={handleSummaryChange}
-              placeholder="Raccontaci chi sei, cosa sai fare e cosa cerchi."
+              placeholder="Breve descrizione delle tue competenze chiave, risultati ottenuti e obiettivi professionali."
             />
           </div>
         </FormSection>
@@ -585,6 +576,7 @@ function App() {
                   <label htmlFor={`skill-name-${skill.id}`}>Competenza</label>
                   <input
                     id={`skill-name-${skill.id}`}
+                    placeholder="Comunicazione"
                     value={skill.name}
                     onChange={(event) =>
                       handleSkillChange(skill.id, "name", event.target.value)
